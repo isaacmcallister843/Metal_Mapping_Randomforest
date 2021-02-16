@@ -1,4 +1,3 @@
-setwd("C:/Users/dmcallister/Desktop/Chidliak_Processed/Data")
 library(class)
 library(reshape)
 library(ggplot2)
@@ -16,7 +15,7 @@ library(ranger)
 rsq <- function (x, y) cor(x, y) ^ 2
 
 # ---- Load in
-chid_met <- read.csv("HallSoil_Points.csv")
+chid_met <- read.csv("dataset.csv")
 
 combined_raster = raster("combined.tif")
 info_frame = read.csv("save.csv", row.names=NULL)
