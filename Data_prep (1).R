@@ -1,11 +1,10 @@
 #Setting directory
-setwd("C:/Users/dmcallister/Desktop/Chidliak_Processed/Spreadsheets/CSV")
 
 #Libraries
 
 #Inputing dataset
-chid <- read.csv("Chidliak_Complete_Dat_R.csv",na.strings = c(""))
-soil <- read.csv("Chidliak_soil_wide.csv",na.strings = c(""))
+chid <- read.csv("dataset1.csv",na.strings = c(""))
+soil <- read.csv("dataset2.csv",na.strings = c(""))
 #Parshing dataset
 #Removing the all NA rows and columns that are in the csv.
 chid_mod <- chid[(3:(nrow(chid)-2)), c(1,2,3,12,24:92) ]
@@ -52,41 +51,39 @@ chid_final <- chid_final[, c(7,5,6,1:5,8:ncol(chid_final))]
 chid_final <- chid_final[,-c(8,10)]
 write.csv(chid_final, "samples_processed.csv")
 
-# ------------------ Hall Samples
+# ------------------ Samples
 # ---- Data Importing 
-Hall_1 <- read.csv("Hall Samples for Mapping_1.csv", na.strings = c(""))
+all_1 <- read.csv("samples1.csv", na.strings = c(""))
 # Hall_2 is going to be used for the lat and long values
-Hall_2 <- read.csv("Hall Samples for Mapping_2.csv", na.strings = c(""))
+all_2 <- read.csv("samples2.csv", na.strings = c(""))
 
 # --- Clean up
-Hall_1_mod <- Hall_1[, c(2,16:130)]
-Hall_1_mod <- Hall_1_mod[Hall_1_mod$INDEX_UNIQUE_ID != 'n/a', ]
-Hall_1_mod <- Hall_1_mod[complete.cases(Hall_1_mod$Al2O3_.), ]
+all_1_mod <- all_1[, c(2,16:130)]
+all_1_mod <- all_1_mod[all_1_mod$INDEX_UNIQUE_ID != 'n/a', ]
+all_1_mod <- all_1_mod[complete.cases(all_1_mod$Al2O3_.), ]
 
 # --- Remove all completely blank columns
 remove_vec = c()
-for (i in 1:ncol(Hall_1_mod)){
-  if (!(FALSE %in% is.na(Hall_1_mod[,i]))){
+for (i in 1:ncol(all_1_mod)){
+  if (!(FALSE %in% is.na(all_1_mod[,i]))){
     remove_vec = c(remove_vec, i)
   }
 }
 
-Hall_1_mod <- Hall_1_mod[, -remove_vec]
+all_1_mod <- Hall_1_mod[, -remove_vec]
 
 # --- New Data frame for just soil concentrations
 names = c()
-for (i in 1:length(colnames(Hall_1_mod))){
-  if ("PPM." %in% strsplit(colnames(Hall_1_mod)[i], "_")[[1]]){
-    names = c(names, colnames(Hall_1_mod)[i])
+for (i in 1:length(colnames(all_1_mod))){
+  if ("PPM." %in% strsplit(colnames(all_1_mod)[i], "_")[[1]]){
+    names = c(names, colnames(all_1_mod)[i])
   }
 }
 
-ppm_df <- Hall_1_mod[, c("INDEX_UNIQUE_ID", names)]
+ppm_df <- all_1_mod[, c("INDEX_UNIQUE_ID", names)]
 
 
 # --- Adding Lat and Long Values 
-# This is such a bad way to - do this, there is definitely a way easier method.
-# It runs fast. In the future maybe try match function 
 
 # Go through the index list and remove the PFG.SSD., we are just left with one number that 
 # we will use to compare indexes and order the lists
@@ -128,7 +125,7 @@ for (k in 2:ncol(ppm_df_mod)){
 rownames(ppm_df_mod) <- 1:nrow(ppm_df_mod)
 # Writing to a csv
 
-write.csv(ppm_df_mod, "Hallsoil_ppm_lat_long.csv")
+write.csv(ppm_df_mod, "allsoil_ppm_lat_long.csv")
 
 
 
