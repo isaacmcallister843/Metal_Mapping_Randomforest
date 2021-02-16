@@ -1,5 +1,4 @@
-setwd("C:/Users/dmcallister/Desktop/Chidliak_Processed/Data")
-chid_met <- read.csv("HallSoil_Points.csv")
+chid_met <- read.csv("dataset.csv")
 
 # Arsenic, Lead 
 
@@ -91,22 +90,6 @@ chid_met <- read.csv("HallSoil_Points.csv")
 # ------------- Modeling
 metal_data = as.matrix(cbind(scale(met_elev[,-6]), met_elev[6]))
 validation_set = scale(info_frame)
-
-#classifier = randomForest(x = metal_data[, -6],
-#                          y = metal_data[, 6],
-#                          ntree = 100,
-#                          importance = TRUE,
-#                          do.trace = TRUE,
-#                          corr.bias = TRUE)
-
-#y_pred_map = predict(classifier, newdata = validation_set)
-#y_pred_standarized = as.numeric(as.character(y_pred_map))
-#test_frame = as.data.frame(cbind(info_frame, y_pred_standarized))
-
-#ggplot(test_frame[x,], aes(x=x, y=y)) +
-#  geom_point(aes(color = y_pred_standarized)) +
-#  ggtitle("Random Forest Classifications")+
-#  scale_colour_gradient(low ="#001c80", high = "#ff0000", limits=c(0, 100),name = "PPM" )
 
 # ---------- Ranger
 library(ranger)
