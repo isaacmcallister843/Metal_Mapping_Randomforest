@@ -20,7 +20,7 @@ chid_met <- read.csv("dataset.csv")
 combined_raster = raster("combined.tif")
 info_frame = read.csv("save.csv", row.names=NULL)
 info_frame <- info_frame[,c(2:ncol(info_frame))]
-chid_met <- read.csv("HallSoil_Points.csv")
+chid_met <- read.csv("allSoil_Points.csv")
 
 met_data <- as.data.frame(cbind(chid_met$POINT_X, chid_met$POINT_Y, chid_met$Cd_PPM))
 colnames(met_data) <- c("x","y","val")
