@@ -7,7 +7,7 @@
 Similar to the Metal_Mapping_GAM project, this project seeks to use the RandomForest ML model to create maps of metal concentrations. This approach has several advantages over the GAM approaches; it is much simpler, results are easy to read, the ranger package in R provides easy work with rasters as well. 
 
 ## Intellectual Property
-Since I worked in a team to develop these products for large clients I do not have permission to distribute the raw data used in these projects. I have also renamed any identifying files and removed the location data from the showcased images. 
+Since I worked in a team to develop these products for large clients I do not have permission to distribute the raw data. I have also renamed any identifying files and removed the location data from the showcased images. 
 
 ## Data and Modeling
 The data was collected by external teams and was presented as a csv and after processing was in the following columns: 
